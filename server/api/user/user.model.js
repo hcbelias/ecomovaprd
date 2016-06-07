@@ -51,7 +51,8 @@ var UserSchema = new _mongoose.Schema({
   facebook: {},
   twitter: {},
   google: {},
-  github: {}
+  github: {},
+  picture: String
 });
 
 /**

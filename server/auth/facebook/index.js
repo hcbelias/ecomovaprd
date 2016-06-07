@@ -20,10 +20,10 @@ var router = _express2.default.Router();
 
 router.get('/', _passport2.default.authenticate('facebook', {
   scope: ['email', 'user_about_me'],
-  failureRedirect: '/signup',
+  failureRedirect: '/login',
   session: false
 })).get('/callback', _passport2.default.authenticate('facebook', {
-  failureRedirect: '/signup',
+  failureRedirect: '/login',
   session: false
 }), _auth.setTokenCookie);
 

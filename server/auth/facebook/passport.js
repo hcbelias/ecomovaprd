@@ -18,7 +18,8 @@ function setup(User, config) {
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
     callbackURL: config.facebook.callbackURL,
-    profileFields: ['displayName', 'emails']
+    enableProof: true,
+    profileFields: ['id', 'displayName', 'emails', 'birthday', 'gender', 'first_name', 'last_name', 'picture']
   }, function (accessToken, refreshToken, profile, done) {
     User.findOne({ 'facebook.id': profile.id }).exec().then(function (user) {
       if (user) {
@@ -30,7 +31,8 @@ function setup(User, config) {
         email: profile.emails[0].value,
         role: 'user',
         provider: 'facebook',
-        facebook: profile._json
+        facebook: profile._json,
+        picture: profile.photos[0].value
       });
       user.save().then(function (user) {
         return done(null, user);
